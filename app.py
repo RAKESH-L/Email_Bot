@@ -1,22 +1,11 @@
 from re import M
 from flask import Flask,render_template,request
 from flask_mysqldb import MySQL
-# import mysql.connector as db
 import os
 from flask_mail import Mail,Message
 from decouple import config
 
 app = Flask(__name__)
-
-# below comments are used to connect database in pythonanywhere.com
-
-# mydb = db.connect(
-#   host="rakeshpy.mysql.pythonanywhere-services.com",
-#   user="rakeshpy",
-#   password="testing123",
-#   database = "rakeshpy$users_db"
-# )
-
 picFolder= os.path.join('static','image')
 
 # below connection (4 lines) are used in xampp server running on MySQL
@@ -47,22 +36,14 @@ def send_message():
         username = request.form['username']
         email = request.form['email']
 
-        # below comments are used in pythonanywhere.com
-
-        # mycursor = mydb.cursor()
-        # sql = "INSERT INTO user_data (Username,Email_ID) VALUES (%s, %s)"
-        # val = (username, email)
-        # mycursor.execute(sql, val)
-        # mydb.commit()
-
         # below cur are used for connection in xampp server running on MySQL
         cur = mysql.connection.cursor()
         cur.execute("INSERT INTO user_data (Username,Email_ID) VALUES (%s,%s)",(username,email))
         mysql.connection.commit()
         cur.close()
+        
         subject = ' Hello ' +username
        # msg = 'hi' +username
-
         html  =  """<!DOCTYPE html>
                 <html lang="en">
                 <head>
@@ -78,7 +59,6 @@ def send_message():
                 </body>
                 </html>
              """
-
         message = Message(subject,recipients=[email], html=html, sender="rakeshofficial22@gmail.com",)
         mail.send(message)
         success = "thank you, Check your gmail inbox"
