@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            background-image:url({{url_for('static',filename='image/1.jpg')}});
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+<!--            background-position: center;-->
+
+
+        }
+        .container{
+            top:50%;
+            left:50%;
+            position: absolute;
+            transform:translate(-50%,-50%);
+        }
+        .card{
+            padding:60px 40px 50px 40px;
+            background:rgb(50,50,50);
+            border-radius:10px;
+<!--            opacity: 0.6;-->
+        }
+        #name{
+            width:200px;
+            border:none;
+            background:transparent;
+            border-bottom:1px solid white;
+            padding:6px;
+            margin-bottom:20px;
+            color:white;
+        }
+        #button{
+            border-radius:20px;
+            padding:10px 20px;
+            background:dodgerblue;
+            color:white;
+            margin-top:20px;
+            border:none;
+            outline:none;
+            margin-left:50px
+        }
+        #button:hover{
+            background-color:skyblue;
+            color:black;
+            cursor:pointer;
+        }
+        a{
+            font-size:13px;
+        }
+        img{
+            border-radius:50%;
+            position:absolute;
+            margin-left:100px;
+            margin-top:-40px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{{ user_image }}" height="80" width="80">
+         <div class="card">
+            <form action="{{url_for('send_message')}}" method="POST" >
+                <input type="text" name="username" placeholder="Username" required id="name"><br>
+                <input type="email" name="email" placeholder="Email" required id="name"><br>
+                <a href="#">Sign up</a><br>
+                <input type="submit" value="login" id="button">
+            </form>
+         </div>
+    </div>
+
+</body>
+</html>
